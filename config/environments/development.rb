@@ -1,4 +1,4 @@
-Rails.application.configure do
+Depot::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -12,9 +12,19 @@ Rails.application.configure do
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
-
+  config.secret_key_base = 'c768fcf940152de1814da1f442eef5151a51708abea431539279e3d5a50d3bba88cd6f19653f6cea64162f0cb34e25e886ec083d051fdf13134f757cde647843'
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    user_name: "aishmita@vinsol.com",
+    password: "aishmita121",
+    enable_starttls_auto: true
+  }
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
