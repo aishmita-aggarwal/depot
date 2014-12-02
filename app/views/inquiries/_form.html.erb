@@ -1,0 +1,42 @@
+<div class="depot_form">
+
+  <%= form_for(@inquiry) do |f| %>
+    <% if @inquiry.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@inquiry.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+        <ul>
+        <% @inquiry.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+      <legend>Ask Your Question:</legend>
+
+        <div class="field">
+          <%= f.label :question %><br>
+          <%= f.text_field :question, :value => @inquiry.question %><br>
+        </div>
+        <div class="field">
+          <%= f.label :user_name %><br>
+          <%= f.text_field :user_name, :value => @inquiry.user_name %><br>
+        </div>
+        <div class="field">
+          <%= f.label :user_email %><br>
+          <%= f.text_field :user_email, :value => @inquiry.user_email %><br>
+        </div>
+        <% if session[:user_id] %>
+          <div class="field">
+            <%= f.label :answer %><br>
+            <%= f.text_field :answer %>
+          </div>
+        <% end %> 
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      <% end %>
+    </fieldset>
+</div>

@@ -10,8 +10,11 @@ Depot::Application.routes.draw do
   get "sessions/create"
   get "sessions/destroy"
 
+  resources :inquiries
   resources :users
-  
+
+  get '/users/new'
+
   resources :products do
     get :who_bought, on: :member
   end

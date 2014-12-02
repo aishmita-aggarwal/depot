@@ -1,0 +1,9 @@
+Dear <%= @inquiry.user_name -%>,
+
+Thank you for your interest in The Pragmatic Store.
+
+You asked the following question on <%= @inquiry.created_at -%>:
+<%= @inquiry.question -%>
+
+The answer to your query would be:
+<%= @inquiry.answer -%>

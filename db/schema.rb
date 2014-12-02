@@ -11,11 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124070250) do
+ActiveRecord::Schema.define(version: 20141202084828) do
 
   create_table "carts", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "tweet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["tweet_id"], name: "index_comments_on_tweet_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "inquiries", force: true do |t|
+    t.string   "question"
+    t.string   "answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "user_email"
+    t.string   "user_name"
   end
 
   create_table "line_items", force: true do |t|
@@ -27,9 +46,9 @@ ActiveRecord::Schema.define(version: 20141124070250) do
     t.integer  "order_id"
   end
 
-  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id"
-  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id"
-  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id"
+  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
+  add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
+  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.string   "name"
@@ -44,10 +63,19 @@ ActiveRecord::Schema.define(version: 20141124070250) do
     t.string   "title"
     t.text     "description"
     t.string   "image_url"
-    t.decimal  "price"
+    t.decimal  "price",       precision: 10, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "tweets", force: true do |t|
+    t.string   "status"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

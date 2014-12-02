@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <td class="question"><%= inquiry.question %>&nbsp;&nbsp;</td>
+    <% if inquiry.answer %>
+      <td class="reply"><%= inquiry.answer %></td>
+    <% else %>
+      <td class="not_answered">Yet to be answered</td>
+    <% end %>
+  </tr>
+</table>
+
+<%= button_to 'Back', inquiries_path, method: :get %>
